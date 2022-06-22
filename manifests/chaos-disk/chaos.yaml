@@ -1,0 +1,13 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PhysicalMachineChaos
+metadata:
+  name: physical-chaos-read
+  namespace: chaos-testing
+spec:
+  action: disk-read-payload
+  address:disk-read-payload
+    - 10.100.32.154:31767
+  disk-read-payload:
+    path: /dev/zero
+    process-num: 7
+    size: 1000G

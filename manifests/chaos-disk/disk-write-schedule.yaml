@@ -1,0 +1,20 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: schedule-delay-example
+spec:
+  schedule: 3 * * * *
+  historyLimit: 2
+  concurrencyPolicy: Allow
+  type: PhysicalMachineChaos
+  physicalMachineChaos:
+    action: disk-write-payload
+    address:
+      - http://10.100.32.147:31760
+      - http://10.100.32.154:31760
+      - http://10.100.32.155:31760
+    disk-write-payload:
+      size: 10G
+      path: /tmp
+      payload-process-num: 4
+    duration: 1m

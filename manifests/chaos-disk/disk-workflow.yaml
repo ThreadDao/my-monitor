@@ -1,0 +1,41 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: disk-workflow-serial
+spec:
+  entry: serial-of-disk-node
+  templates:
+    - name: serial-of-disk-node
+      templateType: Serial
+      children:
+        - disk-write-one
+        - suspending
+        - disk-write-two
+    - name: disk-write-one
+      templateType: PhysicalMachineChaos
+      physicalMachineChaos:
+        action: disk-write-payload
+        address:
+          - http://10.100.32.147:31760
+          - http://10.100.32.154:31760
+          - http://10.100.32.155:31760
+        disk-write-payload:
+          size: 10G
+          path: /tmp
+          payload-process-num: 4
+        duration: 1m
+    - name: suspending
+      templateType: Suspend
+      deadline: 10s
+    - name: disk-write-two
+      templateType: PhysicalMachineChaos
+      physicalMachineChaos:
+        action: disk-write-payload
+        address:
+          - http://10.100.32.147:31760
+          - http://10.100.32.155:31760
+        disk-write-payload:
+          size: 10G
+          path: /tmp
+          payload-process-num: 4
+        duration: 1m

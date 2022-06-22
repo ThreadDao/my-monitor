@@ -1,0 +1,17 @@
+kind: PhysicalMachineChaos
+apiVersion: chaos-mesh.org/v1alpha1
+metadata:
+  namespace: chaos-testing
+  name: physical-chaos-disk-write
+spec:
+  action: disk-write-payload
+  address:
+    - http://10.100.32.147:31760
+    - http://10.100.32.154:31760
+    - http://10.100.32.155:31760
+  uid: 5ebcd32f-47c9-47a2-8b52-55ead7f2903f
+  disk-write-payload:
+    size: 10G
+    path: /tmp
+    payload-process-num: 4
+  duration: 1m
