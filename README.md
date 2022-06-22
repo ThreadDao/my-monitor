@@ -39,3 +39,5 @@ Reference:
 [1] https://yunlzheng.gitbook.io/prometheus-book/part-iii-prometheus-shi-zhan/readmd/use-prometheus-monitor-kubernetes#shi-yong-nodeexporter-jian-kong-ji-qun-zi-yuan-shi-yong-qing-kuang
 
 [2] https://grafana.com/docs/grafana/latest/installation/kubernetes/
+
+[3] https://www.prometheus.wang/quickstart/use-grafana-create-dashboard.html
